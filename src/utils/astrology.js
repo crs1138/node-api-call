@@ -1,13 +1,6 @@
 const axios = require('axios')
 const BASE_URL = `https://sameer-kumar-aztro-v1.p.rapidapi.com/`
-console.log(process.env.RAPIDAPI_KEY)
-// axios.request(options)
-//         .then((response) => {
-//                 console.log(response.data)
-//         })
-//         .catch((error) => {
-//                 console.error(error)
-//         })
+
 module.exports = {
     fetchHoroscope: (sign, day) => {
         const options = {
