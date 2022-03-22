@@ -7,13 +7,10 @@ const HoroscopeAPI = require('./utils/astrology')
 // Create the app
 const app = express()
 
-// Add json parsin middleware
+// Add json parsing middleware
 app.use(express.json())
 
-// Initialize application port
-const port = process.env.PORT || 3000
-
-// Define paths for Express config
+// Define paths for the HBS config
 const viewsPath = path.join(__dirname, './templates/views')
 const partialsPath = path.join(__dirname, './templates/partials')
 
@@ -25,12 +22,13 @@ hbs.registerPartials(partialsPath)
 app.use(express.static(path.join(__dirname, '../public')))
 
 // Create base URL route "/" and render index view
-app.get('', (request, response) => {
+app.get('/', (request, response) => {
     response.render('index', {
         title: 'Horoscope',
     })
 })
 
+// Response to the POST request made by submitting the app's form
 app.post('/horoscope', async (request, response) => {
     const { sign, day } = request.body
 
@@ -41,7 +39,6 @@ app.post('/horoscope', async (request, response) => {
     }
 
     try {
-        // console.log({ yourSign, day })
         const horoscope = await HoroscopeAPI.fetchHoroscope(sign, day)
 
         const { data } = horoscope
@@ -60,6 +57,9 @@ app.get('*', (request, response) => {
         search: 'page',
     })
 })
+
+// Initialize application port
+const port = process.env.PORT || 3000
 
 app.listen(port, () => {
     console.log(`Server is up on port ${port}`)
