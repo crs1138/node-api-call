@@ -1,6 +1,5 @@
 const path = require('path')
 const express = require('express')
-const hbs = require('hbs')
 require('dotenv').config()
 const HoroscopeAPI = require('./utils/astrology')
 
@@ -10,26 +9,11 @@ const app = express()
 // Add json parsing middleware
 app.use(express.json())
 
-// Define paths for the HBS config
-const viewsPath = path.join(__dirname, './templates/views')
-const partialsPath = path.join(__dirname, './templates/partials')
-
-app.set('view engine', 'hbs')
-app.set('views', viewsPath)
-hbs.registerPartials(partialsPath)
-
 // Setup static directory to serve
-app.use(express.static(path.join(__dirname, '../public')))
-
-// Create base URL route "/" and render index view
-app.get('/', (request, response) => {
-    response.render('index', {
-        title: 'Horoscope',
-    })
-})
+app.use(express.static(path.resolve(__dirname, '..', '../client/build')))
 
 // Response to the POST request made by submitting the app's form
-app.post('/horoscope', async (request, response) => {
+app.post('/api/horoscope', async (request, response) => {
     const { sign, day } = request.body
 
     if (!sign || !day) {
@@ -51,11 +35,21 @@ app.post('/horoscope', async (request, response) => {
     }
 })
 
+// Create base URL route "/" and render index view
+app.get('/', (request, response) => {
+    // response.render('index', {
+    //     title: 'Horoscope',
+    // })
+    response.sendFile(
+        path.resolve(__dirname, '..', '../client/build/index.html')
+    )
+})
+
 // Catch all route, renders 404 page
 app.get('*', (request, response) => {
-    response.render('404', {
-        search: 'page',
-    })
+    response.sendFile(
+        path.resolve(__dirname, '..', '..', 'client', 'build', 'index.html')
+    )
 })
 
 // Initialize application port
