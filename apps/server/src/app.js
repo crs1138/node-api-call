@@ -15,7 +15,6 @@ app.use(express.static(path.resolve(__dirname, '..', '../client/build')))
 // Response to the POST request made by submitting the app's form
 app.post('/api/horoscope', async (request, response) => {
     const { sign, day } = request.body
-
     if (!sign || !day) {
         return response.status(404).send({
             error: 'Please provide all details',
@@ -36,19 +35,9 @@ app.post('/api/horoscope', async (request, response) => {
 })
 
 // Create base URL route "/" and render index view
-app.get('/', (request, response) => {
-    // response.render('index', {
-    //     title: 'Horoscope',
-    // })
-    response.sendFile(
-        path.resolve(__dirname, '..', '../client/build/index.html')
-    )
-})
-
-// Catch all route, renders 404 page
 app.get('*', (request, response) => {
     response.sendFile(
-        path.resolve(__dirname, '..', '..', 'client', 'build', 'index.html')
+        path.resolve(__dirname, '..', '../client/build/index.html')
     )
 })
 

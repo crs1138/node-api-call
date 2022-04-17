@@ -28,8 +28,8 @@ module.exports = {
                 resolve: { extensions: ['.js', '.jsx'] },
             },
             {
-                test: /\.styl$/,
-                exclude: /node_modules/,
+                test: /\.(css|styl)$/i,
+                // exclude: /node_modules/,
                 use: ['style-loader', 'css-loader', 'stylus-loader'],
             },
             {
