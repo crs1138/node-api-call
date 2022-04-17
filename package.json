@@ -5,7 +5,8 @@
     "scripts": {
         "build": "turbo run build",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "postversion": "changelog-version-bump.sh $npm_package_version"
+        "postversion": "changelog-version-bump.sh $npm_package_version",
+        "start": "turbo run start"
     },
     "repository": "git+https://github.com/crs1138/node-api-call.git",
     "keywords": [],
