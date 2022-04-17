@@ -7,7 +7,6 @@
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "start": "npm run dev",
         "dev": "webpack serve --open --stats-children --config ./config/webpack.development.cjs",
         "build": "webpack --config ./config/webpack.production.cjs"
     },
