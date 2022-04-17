@@ -1,31 +1,27 @@
 {
-    "name": "api-call",
-    "version": "1.0.0",
+    "name": "node-api-call",
+    "version": "2.0.0",
     "description": "",
-    "main": "index.js",
     "scripts": {
+        "build": "turbo run build",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node src/app.js",
-        "dev": "nodemon src/app.js -e js,hbs"
+        "postversion": "changelog-version-bump.sh $npm_package_version"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/crs1138/node-api-call.git"
-    },
+    "repository": "git+https://github.com/crs1138/node-api-call.git",
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "author": "Jan Pozivil <crs1138@me.com>",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/crs1138/node-api-call/issues"
     },
     "homepage": "https://github.com/crs1138/node-api-call#readme",
-    "dependencies": {
-        "axios": "^0.26.1",
-        "dotenv": "^16.0.0",
-        "express": "^4.17.3",
-        "hbs": "^4.2.0"
-    },
     "devDependencies": {
-        "nodemon": "^2.0.15"
-    }
+        "nodemon": "^2.0.15",
+        "turbo": "^1.1.10"
+    },
+    "workspaces": [
+        "apps/*"
+    ],
+    "main": "index.js",
+    "private": true
 }
